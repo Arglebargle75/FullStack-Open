@@ -7,6 +7,27 @@ const Button = ({handleClick, text}) =>(
   </button>
 )
 
+const Statistics = ({good, neutral, bad, all}) =>{
+  if (all > 0) {
+    return(
+      <div>
+        <h1>Statistics</h1>
+        <Display text={"good: " + good}/>
+        <Display text={"neutral: " + neutral}/>
+        <Display text={"bad: " + bad}/>
+        <Display text={"all: " + all}/>
+
+        <Display text={"average: " + (good-bad)/all}/>
+        <Display text={"positive: " + good / all * 100 + "%"}/>
+      </div>
+    )
+  }
+  else {
+    return (
+      <h1>Press a button to use the App!</h1>
+    )
+  }
+}
 const App = () => {
 
   const [good, setGood] = useState(0)
@@ -27,16 +48,8 @@ const App = () => {
       <Button handleClick={() => incrementValue(setGood, good)} text = "good" />
       <Button handleClick={() => incrementValue(setNeutral, neutral)} text = "neutral"/>
       <Button handleClick={() => incrementValue(setBad, bad)} text = "bad"/>
+      <Statistics good={good} neutral={neutral} bad={bad} all={all}/>
 
-      <h1>Statistics</h1>
-
-      <Display text={"good: " + good}/>
-      <Display text={"neutral: " + neutral}/>
-      <Display text={"bad: " + bad}/>
-      <Display text={"all: " + all}/>
-
-      <Display text={"average: " + (good-bad)/all}/>
-      <Display text={"positive: " + good / all * 100 + "%"}/>
 
     </div>
   )
