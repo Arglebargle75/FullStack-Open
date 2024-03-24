@@ -24,7 +24,10 @@ const Statistics = ({good, neutral, bad, all}) =>{
   }
   else {
     return (
-      <h1>Press a button to use the App!</h1>
+      <div>
+      <h1>Statistics</h1>
+      <div>No feedback given</div>
+      </div>
     )
   }
 }
