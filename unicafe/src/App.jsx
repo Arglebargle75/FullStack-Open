@@ -1,6 +1,12 @@
 import { useState } from 'react'
 const Display = ({text}) => <div>{text}</div>  // Display component to render prop text
 
+const StatisticLine = ({text, value}) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+)
 const Button = ({handleClick, text}) =>(
   <button onClick= {handleClick}>
     {text}
@@ -10,16 +16,15 @@ const Button = ({handleClick, text}) =>(
 const Statistics = ({good, neutral, bad, all}) =>{
   if (all > 0) {
     return(
-      <div>
-        <h1>Statistics</h1>
-        <Display text={"good: " + good}/>
-        <Display text={"neutral: " + neutral}/>
-        <Display text={"bad: " + bad}/>
-        <Display text={"all: " + all}/>
-
-        <Display text={"average: " + (good-bad)/all}/>
-        <Display text={"positive: " + good / all * 100 + "%"}/>
-      </div>
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={good}/>
+          <StatisticLine text="neutral" value={neutral}/>
+          <StatisticLine text="bad" value={bad}/>
+          <StatisticLine text="average" value={(good - bad) / all}/>
+          <StatisticLine text="positive" value={good / all * 100 + "%"}/>
+        </tbody>
+      </table>
     )
   }
   else {
@@ -51,6 +56,7 @@ const App = () => {
       <Button handleClick={() => incrementValue(setGood, good)} text = "good" />
       <Button handleClick={() => incrementValue(setNeutral, neutral)} text = "neutral"/>
       <Button handleClick={() => incrementValue(setBad, bad)} text = "bad"/>
+      <h1>Statistics</h1>
       <Statistics good={good} neutral={neutral} bad={bad} all={all}/>
 
 
